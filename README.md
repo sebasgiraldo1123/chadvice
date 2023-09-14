@@ -1,17 +1,12 @@
 # Chadvice
 
-##  Technologies to selected
+##  run docker
+```bash
+docker-compose up --build
+```
 
-1. Whatsapp connection
-    * WhatsApp Business
-2. Chat bot
-    * Node
-    * Python
-3. Persistence
-    * MySql
-    * Postgres
-    * Oracle
-    * MongoDB 
-
-    * SQL 
-    * ORM
+## run local
+```bash
+npm i
+npm run dev
+```
