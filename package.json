@@ -1,0 +1,20 @@
+{
+  "name": "chadvice",
+  "version": "1.0.0",
+  "description": "1. Whatsapp connection\r     * WhatsApp Business\r 2. Chat bot\r     * Node\r     * Python\r 3. Persistence\r     * MySql\r     * Postgres\r     * Oracle\r     * MongoDB",
+  "main": "index.js",
+  "engines": {
+    "node": ">=20.6.1",
+    "npm": ">=9.8.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --env-file .env index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+  "nodemon": "^3.0.1"
+  }
+}
