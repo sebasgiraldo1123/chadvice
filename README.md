@@ -1,6 +1,6 @@
 # Chadvice
 
-##  Technologies to selected
+##  Technologies selected
 
 1. Whatsapp connection
     * WhatsApp Business
@@ -12,6 +12,5 @@
     * Postgres
     * Oracle
     * MongoDB 
-
     * SQL 
     * ORM

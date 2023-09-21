@@ -132,7 +132,7 @@ async function connectToWhatsApp() {
             await sock.sendMessage(
               numberWa,
               {
-                text: "Soy un robot",
+                text: "Prueba rama Juan Jose Velasquez",
               },
               {
                 quoted: messages[0],
