@@ -118,16 +118,20 @@ async function connectToWhatsApp() {
 
           const compareMessage = captureMessage.toLocaleLowerCase();
 
-          if (compareMessage === "ping") {
-            await sock.sendMessage(
-              numberWa,
-              {
-                text: "Pong",
-              },
-              {
-                quoted: messages[0],
-              }
-            );
+          if (compareMessage) {
+            await sock
+              .sendMessage(
+                numberWa,
+                {
+                  text: "Ingresa un número a multiplicar :",
+                },
+                {
+                  quoted: messages[0],
+                }
+              )
+              .then((result) => {
+                console.log("result ", result);
+              });
           } else {
             await sock.sendMessage(
               numberWa,
@@ -166,10 +170,8 @@ app.get("/send-message", async (req, res) => {
       });
     } else {
       numberWA = "57" + number + "@s.whatsapp.net";
-   
-      if (isConnected()) {
 
-       
+      if (isConnected()) {
         const exist = await sock.onWhatsApp(numberWA);
 
         if (exist?.jid || (exist && exist[0]?.jid)) {
@@ -230,7 +232,7 @@ const updateQR = (data) => {
     case "loading":
       soket?.emit("qrstatus", "./assets/loader.gif");
       soket?.emit("log", "Cargando ....");
-      
+
       break;
     default:
       break;
