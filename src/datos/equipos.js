@@ -1,4 +1,5 @@
 import IBase from "./base.js";
+import { Producto } from "../../schemas.js";
 
 export default class Equipos extends IBase {
   constructor() {
@@ -11,8 +12,7 @@ export default class Equipos extends IBase {
   }
 
   obtenerTodos() {
-    console.log("Obteniendo todos los equipos");
-    return ["alcatel", "motorola 3"];
+    return Producto.findAll();
   }
 
   obtenerPorId(id) {
