@@ -1,5 +1,5 @@
 import IBase from "./base.js";
-import { Producto } from "../../schemas.js";
+import {Producto,Celulares,Otros} from "./schemas.js";
 
 export default class Equipos extends IBase {
   constructor() {

@@ -1,6 +1,6 @@
 import { connectToWhatsApp } from "./src/whatsappCon/index.js";
 import Express from "express";
-import { crearEsquemas } from "./schemas.js";
+import { crearEsquemas } from "./src/datos/schemas.js";
 // ! quitar import (prueba orm)
 import Equipos from "./src/datos/equipos.js";
 
@@ -22,8 +22,8 @@ equipos
     console.log(
       prods.map(
         ({ dataValues }) =>
-          `equipo ${dataValues.nombre} con pantalla de ${dataValues.pantalla} pulgadas`
+          `equipo ${dataValues.nombre} con precio de ${dataValues.precio}`
       )
     )
   );
-// 06e03010064f951efe23f39539778a5a61d44385
+
