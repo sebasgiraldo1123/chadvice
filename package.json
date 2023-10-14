@@ -1,16 +1,14 @@
 {
-  "name": "tutorial_baileys",
-  "version": "1.0.0",
-  "description": "whatsapp bot / apis",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+  "dev": "nodemon --env-file .env -L index.js "
   },
   "keywords": [
     "whastapp"
   ],
-  "author": "anonymos",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "@whiskeysockets/baileys": "github:WhiskeySockets/Baileys",      
@@ -26,6 +24,24 @@
     "qrcode-terminal": "^0.12.0",
     "request": "^2.88.2",
     "sharp": "^0.29.3",
-    "socket.io": "^4.5.0"
-  }
+    "socket.io": "^4.5.0",
+    "@hapi/boom": "^10.0.1",
+    "@whiskeysockets/baileys": "github:whiskeysockets/baileys",
+    "express": "^4.18.2",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "pino": "^8.15.1",
+    "sequelize": "^6.33.0"
+  "name": "chadvice",
+  "version": "1.0.0",
+  "description": "1. Whatsapp connection\r     * WhatsApp Business\r 2. Chat bot\r     * Node\r     * Python\r 3. Persistence\r     * MySql\r     * Postgres\r     * Oracle\r     * MongoDB",
+  "main": "index.js",
+  "engines": {
+    "node": ">=20.6.1",
+    "npm": ">=9.8.1"
+  },
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },      
 }
