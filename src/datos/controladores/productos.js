@@ -1,7 +1,7 @@
-import IBase from "./base.js";
-import {Producto} from "./schemas.js";
+import IBase from "../base.js";
+import {Producto} from "../schemas.js";
 
-export default class Equipos extends IBase {
+export default class Productos extends IBase {
   constructor() {
     super();
     console.log("");
@@ -11,8 +11,9 @@ export default class Equipos extends IBase {
     console.log("Agregando equipo");
   }
 
-  obtenerTodos() {
-    return Producto.findAll();
+  async obtenerTodos() {
+    var productos = await Producto.findAll();
+    return productos.map(({dataValues}) => dataValues);
   }
 
   obtenerPorId(id) {

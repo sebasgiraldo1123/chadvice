@@ -1,3 +1,5 @@
-import EquiposDb from "./equipos.js";
+import ProductosDb from "./controladores/productos.js";
+import CelularesDb from "./controladores/celulares.js";
+import OtrosDb from "./controladores/otros.js";
 
-export { EquiposDb };
+export { ProductosDb, CelularesDb, OtrosDb };
