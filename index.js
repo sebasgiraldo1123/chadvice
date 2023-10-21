@@ -380,4 +380,7 @@ function RegistrarVenta(){
     return dataOtros;
 }
 
-console.log(RegistrarVenta());
+// console.log(RegistrarVenta());
+const celulares = new Celulares();
+celulares.obtenerTodos().then((data) => {console.log(data[0].dataValues)});
+
