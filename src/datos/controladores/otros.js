@@ -1,4 +1,5 @@
 import IBase from "../base.js";
+
 import {Otro, Producto} from "../schemas.js";
 
 export default class Otros extends IBase {
