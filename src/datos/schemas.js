@@ -1,4 +1,4 @@
-import { Association, DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
 import { sequelize } from "./dbConexion.js"; // Importa la instancia de Sequelize creada anteriormente
 
 
@@ -11,10 +11,6 @@ export const Celular = sequelize.define(
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
     },
     marca:{
       type: DataTypes.STRING(35),
@@ -66,18 +62,14 @@ export const Celular = sequelize.define(
   }
 );
 
-export const Otros = sequelize.define(
-  "Otros",
+export const Otro = sequelize.define(
+  "Otro",
   {
-    idOtros: {
+    idOtro: {
       type: DataTypes.SMALLINT,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
     },
     descripcion:{
       type: DataTypes.STRING(300),
@@ -92,7 +84,7 @@ export const Otros = sequelize.define(
     },
   },
   {
-    tableName: "Otros"
+    tableName: "Otro"
   },
 );
 
@@ -107,13 +99,11 @@ export const Producto = sequelize.define(
     },
     idCelular: {
       type: DataTypes.SMALLINT,
+      unique: true
     },
-    idOtros: {
+    idOtro: {
       type: DataTypes.SMALLINT,
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
+      unique: true
     },
     nombre:{
       type: DataTypes.STRING(60),
@@ -145,10 +135,6 @@ export const Usuario = sequelize.define(
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
     },
     nombre:{
       type: DataTypes.STRING(60),
@@ -200,10 +186,7 @@ export const Cliente = sequelize.define(
     idUsuario: {
       type: DataTypes.SMALLINT,
       allowNull: false,
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
+      unique: true
     },
     metodoPago:{
       type: DataTypes.STRING(25),
@@ -227,10 +210,7 @@ export const Empleado = sequelize.define(
     idUsuario: {
       type: DataTypes.SMALLINT,
       allowNull: false,
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
+      unique: true
     },
     admin:{
       type: DataTypes.SMALLINT,
@@ -263,7 +243,7 @@ export const Venta = sequelize.define(
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
-    created_at: {
+    fecha: {
       type: DataTypes.DATE,
       allowNull: false,
     },
@@ -297,10 +277,6 @@ export const DetallesVenta = sequelize.define(
     subTotal: {
       type: DataTypes.FLOAT,
       allowNull: false,
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
     }
   },
   {
@@ -321,10 +297,18 @@ export const Factura = sequelize.define(
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
-    created_at: {
+    total: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    fecha: {
       type: DataTypes.DATE,
       allowNull: false,
-    }
+    },
+    archivo:{
+      type: DataTypes.STRING(100000),
+      allowNull: false,
+    }  
   },
   {
     tableName: "Factura"
@@ -336,7 +320,7 @@ export const Factura = sequelize.define(
 export function crearEsquemas() {
   //Relaciones
   Celular.hasOne(Producto, {foreignKey: 'idCelular'});
-  Otros.hasOne(Producto, {foreignKey: 'idOtros'});
+  Otro.hasOne(Producto, {foreignKey: 'idOtro'});
   Usuario.hasOne(Cliente, {foreignKey: 'idUsuario'});
   Usuario.hasOne(Empleado, {foreignKey: 'idUsuario'});
   Empleado.hasOne(Empleado, {foreignKey: 'admin'});
@@ -348,7 +332,7 @@ export function crearEsquemas() {
   //--------------------------------------------------
   //Se crean las tablas
   Celular.sync();
-  Otros.sync();
+  Otro.sync();
   Producto.sync();
   Usuario.sync();
   Cliente.sync();
