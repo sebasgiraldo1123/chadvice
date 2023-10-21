@@ -1,6 +1,5 @@
 import IBase from "../base.js";
-import {Otro} from "../schemas.js";
-import Productos from "./productos.js";
+import {Otro, Producto} from "../schemas.js";
 
 export default class Otros extends IBase {
     constructor() {
@@ -12,33 +11,12 @@ export default class Otros extends IBase {
       console.log("Agregando equipo");
     }
   
-    async obtenerTodos() {
-        const productos = new Productos();
-        const data = await productos.obtenerTodos();
-        const listaOtros = [];
-    
-        await Promise.all(data.map(async (o) => {
-            const ot = await this.obtenerPorId(o.idOtro);
-            if (ot) {
-                const other = {
-                    id: o.idProducto,
-                    nombre: o.nombre,
-                    descripcion: ot.dataValues.descripcion,
-                    categoria: ot.dataValues.categoria,
-                    imagenProducto: ot.dataValues.imagenProducto,
-                    precio: o.precio,
-                    stock: o.stock,
-                    color: o.color,
-                };
-                listaOtros.push(other);
-            }
-        }));
-
-        return listaOtros;
+    obtenerTodos() {
+        return Otro.findAll({include: Producto});
     }
   
     obtenerPorId(id) {
-      return Otro.findByPk(id);
+        return Otro.findByPk(id, { include: Producto })
     }
   
     modificarPorId(id, data) {
