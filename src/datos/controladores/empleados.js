@@ -5,7 +5,6 @@ import Productos from "./productos.js";
 export default class Celulares extends IBase {
     constructor() {
         super();
-        console.log("");
     }
 
     agregar(data) {
