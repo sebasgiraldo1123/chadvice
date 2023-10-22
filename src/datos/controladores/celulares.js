@@ -1,29 +1,47 @@
 import IBase from "../base.js";
-import {Celular, Producto} from "../schemas.js";
-  
+
+import { Celular, Producto } from "../schemas.js";
+
 export default class Celulares extends IBase {
-    constructor() {
-        super();
-        console.log("");
-    }
+  constructor() {
+    super();
 
-    agregar(data) {
-        console.log("Agregando equipo");
-    }
+  }
 
-    obtenerTodos() {
-      return Celular.findAll({include: Producto});
-    }
+  agregar(data) {
+    console.log("Agregando equipo");
+  }
 
-    obtenerPorId(id) {
-       return Celular.findByPk(id, { include: Producto })
-    }
+  async obtenerTodos() {
+    const celulares = await Celular.findAll({ include: Producto });
+    if (!celulares) return [];
+    return celulares.map((celular) => {
+      const { Producto, ...datos } = celular.dataValues;
+      return { ...datos, ...Producto.dataValues };
+    });
+  }
 
-    modificarPorId(id, data) {
-        console.log("Modificando equipo por id");
-    }
+  obtenerPorId(id) {
+    return Celular.findByPk(id, { include: Producto });
+  }
 
-    eliminarPorId(id) {
-        console.log("Eliminando equipo por id");
-    }
+  async obtenerPorTipo(tipo) {
+    const celulares = await Celular.findAll({
+      where: { tipo },
+      include: Producto,
+    });
+    if (!celulares) return [];
+    return celulares.map((celular) => {
+      const { Producto, ...datos } = celular.dataValues;
+      return { ...datos, ...Producto.dataValues };
+    });
+  }
+
+  modificarPorId(id, data) {
+    console.log("Modificando equipo por id");
+  }
+
+  eliminarPorId(id) {
+    console.log("Eliminando equipo por id");
+  }
 }
