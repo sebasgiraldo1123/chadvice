@@ -4,7 +4,6 @@ import {Venta} from "../schemas.js";
 export default class Celulares extends IBase {
     constructor() {
         super();
-        console.log("");
     }
 
     agregar(data) {
