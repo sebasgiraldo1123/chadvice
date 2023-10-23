@@ -40,7 +40,7 @@ async function connectToWhatsApp() {
   console.log("** no se está mostrando qr **");
   sock.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect, qr } = update;
-    qrDinamic = qr;
+    qrDinamic = qr; 
     if (connection === "close") {
       let reason = new Boom(lastDisconnect.error).output.statusCode;
       if (reason === DisconnectReason.badSession) {
@@ -83,6 +83,30 @@ async function connectToWhatsApp() {
   let step = 0;
   const menuI = "Menu inicial";
 
+  sock.ev.on("messages.upsert", async ({ messages, type }) => {
+    try {
+      if (type !== "notify") return;
+      if (!messages[0]?.key.fromMe) return;
+
+      const mensajeEntrante = messages[0]?.message?.conversation;
+      const numeroTelefonoUsuario = messages[0]?.key?.remoteJid;
+      const mensajeEntranteMinuscula = mensajeEntrante.toLocaleLowerCase();
+
+      const respuestas = await bot.mensaje(
+        mensajeEntranteMinuscula,
+        numeroTelefonoUsuario
+      );0
+      for (let i = 0; i < respuestas.length; i++) {
+        await sock.sendMessage(numeroTelefonoUsuario, respuestas[i]);
+      }
+    } catch (error) {
+      // TODO: implementar logs
+      console.log("error ", error);
+    }
+  });
+
+  /*   const generateMessageQuestion = async (numeroTelefonoUsuario, message, options) => {
+    totaloptions = "";
   const generateMessageQuestion = async (numberWa, message, options) => {
     let totaloptions = "";
     options.forEach((option) => {
