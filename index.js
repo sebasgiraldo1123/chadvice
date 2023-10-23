@@ -356,10 +356,10 @@ import { crearEsquemas } from "./src/datos/schemas.js";
 import { Productos, Otros, Celulares } from "./src/datos/index.js";
 import { log } from "sharp/lib/libvips.js";
 
-// const PORT = process.env.PORT || 3000;
-// const app = Express();
+const PORT = process.env.PORT || 3000;
+const app = Express();
 
-// connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
+connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
 crearEsquemas();
 
 app.listen(PORT, () => {

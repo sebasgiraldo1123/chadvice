@@ -24,7 +24,7 @@ async function connectToWhatsApp() {
   // console.log("** no se está mostrando qr **");
   sock.ev.on("connection.update", async (update) => {
     const { connection, lastDisconnect, qr } = update;
-    qrDinamic = qr;
+    qrDinamic = qr; 
     if (connection === "close") {
       let reason = new Boom(lastDisconnect.error).output.statusCode;
       if (reason === DisconnectReason.badSession) {
@@ -77,7 +77,7 @@ async function connectToWhatsApp() {
       const respuestas = await bot.mensaje(
         mensajeEntranteMinuscula,
         numeroTelefonoUsuario
-      );
+      );0
       for (let i = 0; i < respuestas.length; i++) {
         await sock.sendMessage(numeroTelefonoUsuario, respuestas[i]);
       }

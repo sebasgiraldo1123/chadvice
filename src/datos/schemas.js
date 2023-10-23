@@ -321,16 +321,38 @@ export const Factura = sequelize.define(
 // Crea las tablas en la base de datos si no existen
 export function crearEsquemas() {
   //Relaciones
-  Celular.hasOne(Producto, { foreignKey: "idCelular" });
-  Otro.hasOne(Producto, { foreignKey: "idOtro" });
-  Usuario.hasOne(Cliente, { foreignKey: "idUsuario" });
-  Usuario.hasOne(Empleado, { foreignKey: "idUsuario" });
-  Empleado.hasOne(Empleado, { foreignKey: "admin" });
-  Venta.hasOne(Factura, { foreignKey: "idVenta" });
-  Empleado.hasMany(Venta, { foreignKey: "idEmpleado" });
-  Cliente.hasMany(Venta, { foreignKey: "idCliente" });
-  Venta.hasMany(DetallesVenta, { foreignKey: "idVenta" });
-  Producto.hasMany(DetallesVenta, { foreignKey: "idProducto" });
+
+  
+  Celular.hasOne(Producto, {foreignKey: 'idCelular'});
+  Otro.hasOne(Producto, {foreignKey: 'idOtro'});
+  Producto.belongsTo(Celular, {foreignKey: 'idCelular'});
+  Producto.belongsTo(Otro, {foreignKey: 'idOtro'});
+
+  //Clientes y empleados son usuarios
+  Usuario.hasOne(Cliente, {foreignKey: 'idUsuario'});
+  Usuario.hasOne(Empleado, {foreignKey: 'idUsuario'});
+  Cliente.belongsTo(Usuario, {foreignKey: 'idUsuario'});
+  Empleado.belongsTo(Usuario, {foreignKey: 'idUsuario'});
+
+  //Un empleado tiene un administrador
+  Empleado.hasOne(Empleado, {foreignKey: 'admin'});
+  Empleado.belongsTo(Empleado, {foreignKey: 'admin'});
+
+  //Una venta tiene un empleado y un cliente asociado
+  Venta.belongsTo(Empleado, {foreignKey: 'idEmpleado'});
+  Venta.belongsTo(Cliente, {foreignKey: 'idCliente'});
+  Empleado.hasMany(Venta, {foreignKey: 'idEmpleado'});
+  Cliente.hasMany(Venta, {foreignKey: 'idCliente'});
+
+  //Una venta tiene muchos detalles de venta y varios productos asociados
+  Venta.hasMany(DetallesVenta, {foreignKey: 'idVenta'});
+  Producto.hasMany(DetallesVenta, {foreignKey: 'idProducto'});
+  DetallesVenta.belongsTo(Venta, {foreignKey: 'idVenta'});
+  DetallesVenta.belongsTo(Producto, {foreignKey: 'idProducto'});
+
+  //Una venta tiene una factura asociada
+  Venta.hasOne(Factura, {foreignKey: 'idVenta'});
+  Factura.belongsTo(Venta, {foreignKey: 'idVenta'});
   //--------------------------------------------------
   //Se crean las tablas
   Celular.sync();
