@@ -118,6 +118,29 @@ async function connectToWhatsApp() {
         if (!messages[0]?.key.fromMe) {
           const captureMessage = messages[0]?.message?.conversation;
 
+<<<<<<< HEAD
+          const compareMessage = captureMessage.toLocaleLowerCase();
+
+          if (compareMessage) {
+            await sock
+              .sendMessage(
+                numberWa,
+                {
+                  text: "Ingresa un número a multiplicar :",
+                },
+                {
+                  quoted: messages[0],
+                }
+              )
+              .then((result) => {
+                console.log("result ", result);
+              });
+          } else {
+            await sock.sendMessage(
+              numberWa,
+              {
+                text: "Prueba rama Juan Jose Velasquez",
+=======
           let compareMessage = captureMessage.toLocaleLowerCase();
           if (compareMessage === "hola" && step === 0) {
             let opciones = ["1. Ubicacion", "2. Ver productos", "3. Servicios"];
@@ -130,6 +153,7 @@ async function connectToWhatsApp() {
                   "\n" +
                   opciones[1],
                 footer: "MariangelCell",
+>>>>>>> master
               },
               {
                 quoted: messages[0],
