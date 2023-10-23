@@ -1,6 +1,5 @@
-import { Association, DataTypes } from "sequelize";
+import { DataTypes } from "sequelize";
 import { sequelize } from "./dbConexion.js"; // Importa la instancia de Sequelize creada anteriormente
-
 
 // Definimos los esquemas de las tablas para la base de datos
 export const Celular = sequelize.define(
@@ -12,88 +11,80 @@ export const Celular = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    marca:{
+    marca: {
       type: DataTypes.STRING(35),
       allowNull: false,
     },
-    pantalla:{
+    pantalla: {
       type: DataTypes.STRING(3),
       allowNull: false,
     },
-    capacidadBateria:{
+    capacidadBateria: {
       type: DataTypes.STRING(4),
       allowNull: false,
     },
-    camPrincipal:{
+    camPrincipal: {
       type: DataTypes.STRING(3),
       allowNull: false,
     },
-    procesador:{
+    procesador: {
       type: DataTypes.STRING(45),
       allowNull: false,
     },
-    memInterna:{
+    memInterna: {
       type: DataTypes.STRING(6),
       allowNull: false,
     },
-    memRam:{
+    memRam: {
       type: DataTypes.STRING(6),
       allowNull: false,
     },
-    tipo:{
+    tipo: {
       type: DataTypes.STRING(1),
       allowNull: false,
     },
-    estado:{
-      type: DataTypes.STRING(15)
+    estado: {
+      type: DataTypes.STRING(15),
     },
-    porcentajeBateria:{
-      type: DataTypes.STRING(4)
+    porcentajeBateria: {
+      type: DataTypes.STRING(4),
     },
-    imagenTrasera:{
+    imagenTrasera: {
       type: DataTypes.STRING(150),
     },
-    imagenFrontal:{
+    imagenFrontal: {
       type: DataTypes.STRING(150),
     },
   },
   {
-    tableName: "Celular"
+    tableName: "Celular",
   }
 );
 
-export const Otros = sequelize.define(
-  "Otros",
+export const Otro = sequelize.define(
+  "Otro",
   {
-    idOtros: {
+    idOtro: {
       type: DataTypes.SMALLINT,
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
     },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    descripcion:{
+    descripcion: {
       type: DataTypes.STRING(300),
       allowNull: false,
     },
-    categoria:{
+    categoria: {
       type: DataTypes.STRING(30),
       allowNull: false,
     },
-    imagenProducto:{
+    imagenProducto: {
       type: DataTypes.STRING(150),
     },
   },
   {
-    tableName: "Otros"
-  },
+    tableName: "Otro",
+  }
 );
 
 export const Producto = sequelize.define(
@@ -107,33 +98,31 @@ export const Producto = sequelize.define(
     },
     idCelular: {
       type: DataTypes.SMALLINT,
+      unique: true,
     },
-    idOtros: {
+    idOtro: {
       type: DataTypes.SMALLINT,
+      unique: true,
     },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    nombre:{
+    nombre: {
       type: DataTypes.STRING(60),
       allowNull: false,
     },
-    precio:{
+    precio: {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
-    stock:{
+    stock: {
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
-    color:{
+    color: {
       type: DataTypes.STRING(15),
       allowNull: false,
-    }
+    },
   },
   {
-    tableName: "Producto"
+    tableName: "Producto",
   }
 );
 
@@ -146,45 +135,45 @@ export const Usuario = sequelize.define(
       autoIncrement: true,
       primaryKey: true,
     },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
+    pasoActual: {
+      type: DataTypes.STRING(60),
+      defaultValue: "0",
     },
-    nombre:{
+    nombre: {
       type: DataTypes.STRING(60),
       allowNull: false,
     },
-    cedula:{
+    cedula: {
       type: DataTypes.STRING(11),
       allowNull: false,
-      unique: true
+      unique: true,
     },
-    correo:{
+    correo: {
       type: DataTypes.STRING(60),
       allowNull: false,
-      unique: true
+      unique: true,
     },
-    contrasena:{
+    contrasena: {
       type: DataTypes.STRING(60),
       allowNull: false,
-      unique: true
+      // unique: true,
     },
-    direccion:{
+    direccion: {
       type: DataTypes.STRING(60),
       allowNull: false,
     },
-    telefono:{
+    telefono: {
       type: DataTypes.STRING(60),
       allowNull: false,
-      unique: true
+      unique: true,
     },
-    fechaNacimiento:{
+    fechaNacimiento: {
       type: DataTypes.DATE,
       allowNull: false,
     },
   },
   {
-    tableName: "Usuario"
+    tableName: "Usuario",
   }
 );
 
@@ -200,18 +189,15 @@ export const Cliente = sequelize.define(
     idUsuario: {
       type: DataTypes.SMALLINT,
       allowNull: false,
+      unique: true,
     },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    metodoPago:{
+    metodoPago: {
       type: DataTypes.STRING(25),
       allowNull: false,
     },
   },
   {
-    tableName: "Cliente"
+    tableName: "Cliente",
   }
 );
 
@@ -227,22 +213,19 @@ export const Empleado = sequelize.define(
     idUsuario: {
       type: DataTypes.SMALLINT,
       allowNull: false,
+      unique: true,
     },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    admin:{
+    admin: {
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
     cargo: {
       type: DataTypes.STRING(15),
       allowNull: false,
-    }
+    },
   },
   {
-    tableName: "Empleado"
+    tableName: "Empleado",
   }
 );
 
@@ -263,13 +246,13 @@ export const Venta = sequelize.define(
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
-    created_at: {
+    fecha: {
       type: DataTypes.DATE,
       allowNull: false,
     },
   },
   {
-    tableName: "Venta"
+    tableName: "Venta",
   }
 );
 
@@ -298,14 +281,10 @@ export const DetallesVenta = sequelize.define(
       type: DataTypes.FLOAT,
       allowNull: false,
     },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    }
   },
   {
-    tableName: "DetallesVenta"
-  },
+    tableName: "DetallesVenta",
+  }
 );
 
 export const Factura = sequelize.define(
@@ -321,34 +300,41 @@ export const Factura = sequelize.define(
       type: DataTypes.SMALLINT,
       allowNull: false,
     },
-    created_at: {
+    total: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
+    fecha: {
       type: DataTypes.DATE,
       allowNull: false,
-    }
+    },
+    archivo: {
+      type: DataTypes.STRING(100000),
+      allowNull: false,
+    },
   },
   {
-    tableName: "Factura"
+    tableName: "Factura",
   }
 );
-
 
 // Crea las tablas en la base de datos si no existen
 export function crearEsquemas() {
   //Relaciones
-  Celular.hasOne(Producto, {foreignKey: 'idCelular'});
-  Otros.hasOne(Producto, {foreignKey: 'idOtros'});
-  Usuario.hasOne(Cliente, {foreignKey: 'idUsuario'});
-  Usuario.hasOne(Empleado, {foreignKey: 'idUsuario'});
-  Empleado.hasOne(Empleado, {foreignKey: 'admin'});
-  Venta.hasOne(Factura, {foreignKey: 'idVenta'});
-  Empleado.hasMany(Venta, {foreignKey: 'idEmpleado'});
-  Cliente.hasMany(Venta, {foreignKey: 'idCliente'});
-  Venta.hasMany(DetallesVenta, {foreignKey: 'idVenta'});
-  Producto.hasMany(DetallesVenta, {foreignKey: 'idProducto'});
+  Celular.hasOne(Producto, { foreignKey: "idCelular" });
+  Otro.hasOne(Producto, { foreignKey: "idOtro" });
+  Usuario.hasOne(Cliente, { foreignKey: "idUsuario" });
+  Usuario.hasOne(Empleado, { foreignKey: "idUsuario" });
+  Empleado.hasOne(Empleado, { foreignKey: "admin" });
+  Venta.hasOne(Factura, { foreignKey: "idVenta" });
+  Empleado.hasMany(Venta, { foreignKey: "idEmpleado" });
+  Cliente.hasMany(Venta, { foreignKey: "idCliente" });
+  Venta.hasMany(DetallesVenta, { foreignKey: "idVenta" });
+  Producto.hasMany(DetallesVenta, { foreignKey: "idProducto" });
   //--------------------------------------------------
   //Se crean las tablas
   Celular.sync();
-  Otros.sync();
+  Otro.sync();
   Producto.sync();
   Usuario.sync();
   Cliente.sync();
@@ -358,5 +344,3 @@ export function crearEsquemas() {
   Factura.sync();
   console.log("Se crean las tablas");
 }
-
-

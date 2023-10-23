@@ -20,7 +20,11 @@
     "ffmpeg": "^0.0.4",
     "jest": "^28.0.3",
     "jimp": "^0.16.1",
+<<<<<<< HEAD
     "link-preview-js": "^3.0.0",
+=======
+    "link-preview-js": "^2.1.13",
+>>>>>>> 9bfb7e7c2aa2fe48743d6f15f9f6966ef6197bbd
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
     "pino": "^8.15.1",

@@ -1,10 +1,10 @@
-import IBase from "./base.js";
-import {Producto} from "./schemas.js";
+import IBase from "../base.js";
 
-export default class Equipos extends IBase {
+import { Otro, Producto } from "../schemas.js";
+
+export default class Otros extends IBase {
   constructor() {
     super();
-    console.log("");
   }
 
   agregar(data) {
@@ -12,11 +12,11 @@ export default class Equipos extends IBase {
   }
 
   obtenerTodos() {
-    return Producto.findAll();
+    return Otro.findAll({ include: Producto });
   }
 
   obtenerPorId(id) {
-    console.log("Obteniendo equipo por id");
+    return Otro.findByPk(id, { include: Producto });
   }
 
   modificarPorId(id, data) {
