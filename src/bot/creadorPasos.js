@@ -1,5 +1,5 @@
-import { Paso, PasoOciones, PasoQuery } from "./paso.js";
-import { Productos, Celulares, Usuarios } from "../datos/index.js";
+import { Paso, PasoOpciones, PasoQuery } from "./paso.js";
+import { Productos, Celulares, Usuarios, Otros } from "../datos/index.js";
 
 export class CreadorPasos {
   constructor() {
@@ -11,27 +11,34 @@ export class CreadorPasos {
   }
 
   definirPasos() {
-    const pInicio = new PasoOciones(
+    const pInicio = new PasoOpciones(
       "0",
       "inicio",
-      "¡Bienvenido al Chatbot de MariangelCell! 😊📱\n¡Hola! Soy tu asistente virtual Mari, estoy aquí para ayudarte con todas tus consultas y necesidades relacionadas con nuestros productos y servicios tecnológicos. 🤖\nNo dudes en preguntarme sobre nuestros últimos modelos de celulares 📲, audífonos 🎧, cámaras fotográficas 📷 y periféricos 🖱️. También puedo ayudarte a conocer nuestro inventario actualizado, registrar tus compras en tienda física 🛒, brindarte información sobre nuestros servicios técnicos 🛠️, y mucho más.\nEstoy aquí para hacer tu experiencia con MariangelCell más fácil y conveniente. ¡Así que adelante! 👍\n\nSelecciona una de las opciones : \n\n"
+      "¡Bienvenido a MariangelCell! 😊📱 Soy Mari, tu asistente virtual 🤖. Estoy aquí para ayudarte con tus consultas sobre productos y servicios tecnológicos. No dudes en preguntar sobre celulares 📲, audífonos 🎧, cámaras 📷, periféricos 🖱 y más.\n\nSelecciona una de las opciones : \n\n"
     );
 
-    const pUbicacion = new Paso("1", "Ubicación", "Aún no implementado");
+    const pUbicacion = new Paso("1", "Ubicación", "NIT:10.337.355.154-1 CEL: 3218660343\nCarrera 23 #24-19 Las Rampas local 30\nCarrera 23 #19-34 Palacio Arzobispal"
+    );
 
-    const pConsultarProductos = new PasoOciones(
+    const pConsultarProductos = new PasoOpciones(
       "2",
       "Consultar productos",
       "Elija el tipo de producto"
     );
 
-    const pConsultarOtros = new Paso(
+    const pConsultarOtros = new PasoQuery(
       "3",
       "Consultar otros productos",
-      "Aún no implementado"
+      "Estos son otros productos que podrían interesarte:",
+      async () => {
+        const otros = await new Otros().obtenerTodos();
+        return otros.map((otro) => {
+          return `Nombre: ${otro.nombre}\nDescripción: ${otro.descripcion}\nPrecio: ${otro.precio}\nColor: ${otro.color}`;
+        }, "");
+      }
     );
 
-    const pConsultarCelulares = new PasoOciones("4", "Consultar celulares", "");
+    const pConsultarCelulares = new PasoOpciones("4", "Consultar celulares", "");
 
     const pConsultarCelularesTodos = new PasoQuery(
       "5",
@@ -45,7 +52,7 @@ export class CreadorPasos {
       }
     );
 
-    const pConsultarCelularesFiltro = new PasoOciones(
+    const pConsultarCelularesFiltro = new PasoOpciones(
       "6",
       "Filtrar",
       "!Perfecto! ¿Qué tipo de celular estás buscando?"
@@ -66,7 +73,7 @@ export class CreadorPasos {
     const pConsultarCelularesFiltroExhibicion = new PasoQuery(
       "8",
       "Exhibición",
-      "Estos son todos loa celulares nuevos que tenemos disponibles:",
+      "Estos son todos los celulares nuevos que tenemos disponibles:",
       async () => {
         const celulares = await new Celulares().obtenerPorTipo("e");
         return celulares.map((cel) => {
@@ -103,7 +110,7 @@ export class CreadorPasos {
       pConsultarCelularesFiltroExhibicion
     );
   }
-
+  
   agregarPaso(...paso) {
     for (const p of paso) {
       this.pasos.set(p.id, p);
