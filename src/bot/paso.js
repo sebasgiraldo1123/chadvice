@@ -73,3 +73,9 @@ export class PasoQuery extends Paso {
     return mensajes;
   }
 }
+
+export class SetTipoCelular extends PasoOciones {
+  accion(input) {
+    this.query.setTipoCelular(input);
+  }
+}

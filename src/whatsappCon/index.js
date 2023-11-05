@@ -7,11 +7,12 @@ import log from "pino";
 import { Boom } from "@hapi/boom";
 
 import Bot from "../bot/index.js";
+import Controlador from "../bot/controlador.js";
 
 let sock;
 let qrDinamic;
 
-const bot = new Bot();
+const bot = new Controlador();
 async function connectToWhatsApp() {
   const { state, saveCreds } = await useMultiFileAuthState("session_auth_info");
 
@@ -78,6 +79,7 @@ async function connectToWhatsApp() {
         mensajeEntranteMinuscula,
         numeroTelefonoUsuario
       );
+
       for (let i = 0; i < respuestas.length; i++) {
         await sock.sendMessage(numeroTelefonoUsuario, respuestas[i]);
       }

@@ -38,18 +38,8 @@ export default class Bot {
 
   async _obtenerUsuario(numeroTelefonoUsuario) {
     let usuario = await this.usuarios.obtenerPorTelefono(numeroTelefonoUsuario);
-
     if (!usuario) {
-      const nuevoUsuario = {
-        nombre: "Usiario Luis E",
-        cedula: numeroTelefonoUsuario.slice(0, 8),
-        correo: `correo${numeroTelefonoUsuario}@example.com`,
-        contrasena: "contrasenaSegura" + numeroTelefonoUsuario,
-        direccion: "Dirección del Usuario",
-        telefono: numeroTelefonoUsuario,
-        fechaNacimiento: "1990-01-01",
-      };
-      usuario = await this.usuarios.agregar(nuevoUsuario);
+      usuario = await this.usuarios.agregarNuevo(numeroTelefonoUsuario);
     }
     return usuario;
   }
