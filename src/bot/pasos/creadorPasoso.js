@@ -47,6 +47,7 @@ const pConsultarCelularesTodos = new PasoFinalQuery(
   "5",
   "Todos los celulares",
   "Estos son todos los celulares que tenemos disponibles:",
+  "_",
   filtroCelular
 );
 
