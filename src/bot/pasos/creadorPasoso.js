@@ -19,6 +19,7 @@ const pRegistroCelular = new PasoInput(
   "12",
   "Registro de productos",
   "Ingrese el nombre del producto",
+  "_",
   queryRegistroProductos
 );
 const pRegistroCelularFin = new PasoFinalQuery(
@@ -28,13 +29,13 @@ const pRegistroCelularFin = new PasoFinalQuery(
   "nombre",
   queryRegistroProductos
 );
+
 pRegistroCelular.agregarOpcion(pRegistroCelularFin);
 const pConsultarProductos = new PasoOpciones(
   "2",
   "Consultar productos",
   "Elija el tipo de producto"
 );
-
 const pConsultarOtros = new Paso(
   "3",
   "Consultar otros productos",

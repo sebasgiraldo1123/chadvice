@@ -14,6 +14,17 @@ export default class FiltroCelular extends Query {
     this.valores.set("precio", null);
   }
 
+  limpiar() {
+    this.valores.set("tipo", null);
+    this.valores.set("nombre", null);
+    this.valores.set("marca", null);
+    this.valores.set("camPrincipal", null);
+    this.valores.set("procesador", null);
+    this.valores.set("memInterna", null);
+    this.valores.set("memRam", null);
+    this.valores.set("precio", null);
+  }
+
   async ejecutar() {
     const celulares = await new CelularsBD().obtenerTodos();
     const filtro = celulares
@@ -59,14 +70,14 @@ export default class FiltroCelular extends Query {
       );
 
     return filtro.map((cel) => {
-      const base64Image = cel.imagenFrontal;
-      const base64Data = base64Image.replace(/^data:image\/\w+;base64,/, "");
-      const buffer = Buffer.from(base64Data, "base64");
       if (!cel.imagenFrontal) {
         return {
           text: `nombre: ${cel.nombre}\nmarca: ${cel.marca}\nprecio: ${cel.precio}$\nprocesador: ${cel.procesador}`,
         };
       }
+      const base64Image = cel.imagenFrontal;
+      const base64Data = base64Image.replace(/^data:image\/\w+;base64,/, "");
+      const buffer = Buffer.from(base64Data, "base64");
       return {
         image: buffer,
         caption: `nombre: ${cel.nombre}\nmarca: ${cel.marca}\nprecio: ${cel.precio}$\nprocesador: ${cel.procesador}`,

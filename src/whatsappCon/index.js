@@ -5,8 +5,6 @@ import {
 } from "@whiskeysockets/baileys";
 import log from "pino";
 import { Boom } from "@hapi/boom";
-
-import Bot from "../bot/index.js";
 import Controlador from "../bot/controlador.js";
 
 let sock;

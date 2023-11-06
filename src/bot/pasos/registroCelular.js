@@ -6,6 +6,10 @@ export default class RegistroCelular extends Query {
     this.valores.set("nombre", null);
   }
 
+  limpiar() {
+    this.valores.set("nombre", null);
+  }
+
   async ejecutar() {
     console.log("-------------------------------------");
     console.log(this.valores);
