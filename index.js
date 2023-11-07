@@ -118,29 +118,6 @@ async function connectToWhatsApp() {
         if (!messages[0]?.key.fromMe) {
           const captureMessage = messages[0]?.message?.conversation;
 
-<<<<<<< HEAD
-          const compareMessage = captureMessage.toLocaleLowerCase();
-
-          if (compareMessage) {
-            await sock
-              .sendMessage(
-                numberWa,
-                {
-                  text: "Ingresa un número a multiplicar :",
-                },
-                {
-                  quoted: messages[0],
-                }
-              )
-              .then((result) => {
-                console.log("result ", result);
-              });
-          } else {
-            await sock.sendMessage(
-              numberWa,
-              {
-                text: "Prueba rama Juan Jose Velasquez",
-=======
           let compareMessage = captureMessage.toLocaleLowerCase();
           if (compareMessage === "hola" && step === 0) {
             let opciones = ["1. Ubicacion", "2. Ver productos", "3. Servicios"];
@@ -153,7 +130,6 @@ async function connectToWhatsApp() {
                   "\n" +
                   opciones[1],
                 footer: "MariangelCell",
->>>>>>> master
               },
               {
                 quoted: messages[0],
@@ -373,22 +349,32 @@ server.listen(port, () => {
   console.log("Server Run Port : " + port);
 }); */
 
-import { connectToWhatsApp } from "./src/whatsappCon/index.js";
+// import { connectToWhatsApp } from "./src/whatsappCon/index.js";
 import Express from "express";
 import { crearEsquemas } from "./src/datos/schemas.js";
 // ! quitar import (prueba orm)
-import { Productos, Otros, Celulares } from "./src/datos/index.js";
+// import { Productos, Otros, Celulares } from "./src/datos/index.js";
+import Ventas from "./src/datos/controladores/ventas.js"
+import Celulares from "./src/datos/controladores/celulares.js";
 import { log } from "sharp/lib/libvips.js";
 
-const PORT = process.env.PORT || 3000;
-const app = Express();
+// const PORT = process.env.PORT || 3000;
+// const app = Express();
 
-connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
+// connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
 crearEsquemas();
 
-app.listen(PORT, () => {
-  console.log("Server Run PORT : " + PORT);
-});
+// app.listen(PORT, () => {
+//   console.log("Server Run PORT : " + PORT);
+// });
+
+async function ventas(){
+  const ventas = await new Ventas().obtenerTodos();
+  console.log(ventas[0]);
+}
+
+ventas();
+
 
 // ! quitar import (prueba orm)
 // const celulares = new Celulares();

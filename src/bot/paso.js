@@ -18,7 +18,7 @@ export class Paso {
   }
 }
 
-export class PasoOciones extends Paso {
+export class PasoOpciones extends Paso {
   constructor(id, descripcion, mensaje) {
     super(id, descripcion, mensaje);
     /**

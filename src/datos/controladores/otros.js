@@ -10,11 +10,16 @@ export default class Otros extends IBase {
   agregar(data) {
     console.log("Agregando equipo");
   }
-
-  obtenerTodos() {
-    return Otro.findAll({ include: Producto });
+  
+  async obtenerTodos() {
+    const otros = await Otro.findAll({ include: Producto });
+    if (!otros) return [];
+    return otros.map((otro) => {
+      const { Producto, ...datos } = otro.dataValues;
+      return { ...datos, ...Producto.dataValues };
+    });
   }
-
+  
   obtenerPorId(id) {
     return Otro.findByPk(id, { include: Producto });
   }
