@@ -91,11 +91,11 @@ async function connectToWhatsApp() {
       const mensajeEntrante = messages[0]?.message?.conversation;
       const numeroTelefonoUsuario = messages[0]?.key?.remoteJid;
       const mensajeEntranteMinuscula = mensajeEntrante.toLocaleLowerCase();
-
+      
       const respuestas = await bot.mensaje(
         mensajeEntranteMinuscula,
         numeroTelefonoUsuario
-      );0
+      );
       for (let i = 0; i < respuestas.length; i++) {
         await sock.sendMessage(numeroTelefonoUsuario, respuestas[i]);
       }
@@ -105,7 +105,8 @@ async function connectToWhatsApp() {
     }
   });
 
-  /*   const generateMessageQuestion = async (numeroTelefonoUsuario, message, options) => {
+/*
+  const generateMessageQuestion = async (numeroTelefonoUsuario, message, options) => {
     totaloptions = "";
   const generateMessageQuestion = async (numberWa, message, options) => {
     let totaloptions = "";
@@ -247,4 +248,5 @@ async function connectToWhatsApp() {
   sock.ev.on("creds.update", saveCreds);
 }
 
-export { connectToWhatsApp };
+// export {connectToWhatsApp};
+}*/}
