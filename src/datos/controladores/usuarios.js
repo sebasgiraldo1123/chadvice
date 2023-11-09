@@ -21,6 +21,20 @@ export default class Usuarios extends IBase {
       });
   }
 
+  async agregarNuevo(numeroTelefonoUsuario) {
+    const nuevoUsuario = {
+      nombre: "Nuevo Sin Nombre",
+      cedula: numeroTelefonoUsuario.slice(0, 8),
+      correo: `correo${numeroTelefonoUsuario}@example.com`,
+      contrasena: "contrasenaSegura" + numeroTelefonoUsuario,
+      direccion: "sin dirección",
+      telefono: numeroTelefonoUsuario,
+      fechaNacimiento: "1990-01-01",
+    };
+
+    return this.agregar(nuevoUsuario);
+  }
+
   async obtenerTodos() {
     const productos = new Productos();
     const data = await productos.obtenerTodos();

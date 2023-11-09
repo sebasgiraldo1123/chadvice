@@ -5,29 +5,12 @@ import {
 } from "@whiskeysockets/baileys";
 import log from "pino";
 import { Boom } from "@hapi/boom";
-import Bot from "../bot/index.js";
-import path from "path";
-import fs from "fs";
-import  express  from "express";
-import fileUpload from "express-fileupload";
-import bodyParser from "body-parser";
-import cors from "cors";
-const app = express();
-const session = "session_auth_info.json"; 
-
-// enable files upload
-
-app.use(
-  fileUpload({
-    createParentPath: true,
-  })
-);
-
+import Controlador from "../bot/controlador.js";
 
 let sock;
 let qrDinamic;
 
-const bot = new Bot();
+const bot = new Controlador();
 async function connectToWhatsApp() {
   const { state, saveCreds } = await useMultiFileAuthState("session_auth_info");
 
@@ -92,6 +75,7 @@ async function connectToWhatsApp() {
       const numeroTelefonoUsuario = messages[0]?.key?.remoteJid;
       const mensajeEntranteMinuscula = mensajeEntrante.toLocaleLowerCase();
       
+      
       const respuestas = await bot.mensaje(
         mensajeEntranteMinuscula,
         numeroTelefonoUsuario
@@ -105,6 +89,8 @@ async function connectToWhatsApp() {
     }
   });
 
+/*
+  const generateMessageQuestion = async (numeroTelefonoUsuario, message, options) => {
 /*
   const generateMessageQuestion = async (numeroTelefonoUsuario, message, options) => {
     totaloptions = "";
