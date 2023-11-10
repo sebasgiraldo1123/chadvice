@@ -37,7 +37,6 @@ const pRegistroCelularFin = new PasoFinalQuery(
   "nombre",
   queryRegistroProductos
 );
-
 pRegistroCelular.agregarOpcion (pObtenerNombre); pObtenerNombre.agregarOpcion(pRegistroCelularFin);
 const pConsultarProductos = new PasoOpciones(
   "2",
@@ -144,6 +143,6 @@ export const pasos = [
   pConsultarCelularesFiltroMemoria64,
   pConsultarCelularesFiltroMemoria128,
   pRegistroCelular,
- pObtenerNombre,
+  pObtenerNombre,
   pRegistroCelularFin,
 ];
