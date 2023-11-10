@@ -4,10 +4,12 @@ export default class RegistroCelular extends Query {
   constructor() {
     super();
     this.valores.set("nombre", null);
+    this.valores.set("cedula", null);
   }
 
   limpiar() {
-    this.valores.set("nombre", null);
+    this.valores.set("nombre", null);    
+    this.valores.set("cedula", null);
   }
 
   async ejecutar() {
@@ -15,6 +17,6 @@ export default class RegistroCelular extends Query {
     console.log(this.valores);
     console.log("-------------------------------------");
 
-    return [{ text: "🤪" }];
+    return [{ text: ` ${this.valores.get("cedula")}` }];
   }
 }

@@ -18,19 +18,26 @@ const queryRegistroProductos = new RegistroCelular();
 const pRegistroCelular = new PasoInput(
   "12",
   "Registro de productos",
-  "Ingrese el nombre del producto",
+  "Ingrese su cédula: ",
   "_",
-  queryRegistroProductos
-);
-const pRegistroCelularFin = new PasoFinalQuery(
-  "13",
-  "_",
-  "Faltatan datos!",
-  "nombre",
   queryRegistroProductos
 );
 
-pRegistroCelular.agregarOpcion(pRegistroCelularFin);
+const pObtenerNombre = new PasoInput(
+  "13",
+  "Registro de productos",
+  "Ingrese el nombre del producto: ",
+  "cedula",
+  queryRegistroProductos
+);
+const pRegistroCelularFin = new PasoFinalQuery(
+  "14",
+  "_",
+  "El registro fue exitoso!!",
+  "nombre",
+  queryRegistroProductos
+);
+pRegistroCelular.agregarOpcion (pObtenerNombre); pObtenerNombre.agregarOpcion(pRegistroCelularFin);
 const pConsultarProductos = new PasoOpciones(
   "2",
   "Consultar productos",
@@ -136,5 +143,6 @@ export const pasos = [
   pConsultarCelularesFiltroMemoria64,
   pConsultarCelularesFiltroMemoria128,
   pRegistroCelular,
+  pObtenerNombre,
   pRegistroCelularFin,
 ];
