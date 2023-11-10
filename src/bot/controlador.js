@@ -3,7 +3,7 @@ import Paso from "./pasos/paso.js";
 import PasoOpciones from "./pasos/pasoOpciones.js";
 import PasoQuery from "./pasos/pasoQuery.js";
 import PasoInput from "./pasos/pasoInput.js";
-import { pasos } from "./pasos/creadorPasoso.js";
+import { pasos } from "./pasos/creadorPasos.js";
 
 const PASO_BASE = "0";
 export default class Controlador {

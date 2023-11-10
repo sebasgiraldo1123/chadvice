@@ -229,10 +229,9 @@ async function connectToWhatsApp() {
     } catch (error) {
       console.log("error ", error);
     }
-  });
+  });*/
 
   sock.ev.on("creds.update", saveCreds);
 }
 
-// export {connectToWhatsApp};
-}*/}
+export {connectToWhatsApp};

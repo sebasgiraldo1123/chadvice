@@ -29,7 +29,7 @@ export default class PasoFinalQuery extends Paso {
    */
   async aMensajes() {
     const resultado = await this.query.ejecutar();
-    // this.query.limpiar();
+    this.query.limpiar();
     return [{ text: this.mensaje }, ...resultado];
   }
 }

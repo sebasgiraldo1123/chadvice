@@ -349,7 +349,7 @@ server.listen(port, () => {
   console.log("Server Run Port : " + port);
 }); */
 
-// import { connectToWhatsApp } from "./src/whatsappCon/index.js";
+import { connectToWhatsApp } from "./src/whatsappCon/index.js";
 import Express from "express";
 import { crearEsquemas } from "./src/datos/schemas.js";
 // ! quitar import (prueba orm)
@@ -358,22 +358,24 @@ import Ventas from "./src/datos/controladores/ventas.js"
 import Celulares from "./src/datos/controladores/celulares.js";
 import { log } from "sharp/lib/libvips.js";
 
-// const PORT = process.env.PORT || 3000;
-// const app = Express();
+const PORT = process.env.PORT || 3000;
+const app = Express();
 
-// connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
+connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
 crearEsquemas();
 
-// app.listen(PORT, () => {
-//   console.log("Server Run PORT : " + PORT);
-// });
+app.listen(PORT, () => {
+  console.log("Server Run PORT : " + PORT);
+});
 
 async function ventas(){
   const ventas = await new Ventas().obtenerTodos();
   console.log(ventas[0]);
 }
 
-ventas();
+console.log("Estoy funcionando papá!!!!!!!!!!!!!!!!!!!!!");
+
+// ventas();
 
 
 // ! quitar import (prueba orm)
