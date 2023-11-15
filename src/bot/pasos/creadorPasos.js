@@ -2,10 +2,12 @@ import Paso from "./paso.js";
 import PasoOpciones from "./pasoOpciones.js";
 import PasoQuery from "./pasoQuery.js";
 import PasoInput from "./pasoInput.js";
+import PasoInputLista from "./pasoInputLista.js";
 import Query from "./query.js";
 import RegistroCelular from "./registroCelular.js";
 import PasoFinalQuery from "./pasoFinalQuery.js";
 import FiltroCelular from "./filtroCelular.js";
+import RegistroVenta from "./registrarVentas.js";
 
 const pInicio = new PasoOpciones(
   "0",
@@ -37,7 +39,9 @@ const pRegistroCelularFin = new PasoFinalQuery(
   "nombre",
   queryRegistroProductos
 );
-pRegistroCelular.agregarOpcion (pObtenerNombre); pObtenerNombre.agregarOpcion(pRegistroCelularFin);
+pRegistroCelular.agregarOpcion (pObtenerNombre);
+pObtenerNombre.agregarOpcion(pRegistroCelularFin);
+
 const pConsultarProductos = new PasoOpciones(
   "2",
   "Consultar productos",
@@ -106,7 +110,42 @@ const pConsultarCelularesFiltroMemoria128 = new PasoFinalQuery(
   filtroCelular
 );
 
-pInicio.agregarOpcion(pUbicacion, pConsultarProductos, pRegistroCelular);
+const registrarVenta = new RegistroVenta();
+const pRegistrarVenta = new PasoInput(
+  "15",
+  "Registrar venta",
+  "Ingrese la cedula del cliente:",
+  "_",
+  registrarVenta
+);
+const pObtenerProducto = new PasoInput(
+  "16",
+  "Registrar venta",
+  "Ingrese el nombre del producto:",
+  "cedula",
+  registrarVenta
+);
+const pFinalObtenerProducto = new PasoInputLista(
+  "17",
+  "Registrar venta",
+  "Se está procesando la solicitud",
+  "productos",
+  registrarVenta
+);
+const pFinalRegistrarVenta = new PasoFinalQuery(
+  "18",
+  "Registrar venta",
+  "El registro fue exitoso!!",
+  "_",
+  registrarVenta
+);
+
+pRegistrarVenta.agregarOpcion(pObtenerProducto);
+pObtenerProducto.agregarOpcion(pFinalObtenerProducto);
+pFinalObtenerProducto.agregarOpcion(pFinalRegistrarVenta);
+
+
+pInicio.agregarOpcion(pUbicacion, pConsultarProductos, pRegistroCelular,pRegistrarVenta);
 pConsultarProductos.agregarOpcion(pConsultarCelulares, pConsultarOtros);
 pConsultarCelulares.agregarOpcion(
   pConsultarCelularesTodos,
@@ -144,5 +183,9 @@ export const pasos = [
   pConsultarCelularesFiltroMemoria128,
   pRegistroCelular,
   pObtenerNombre,
+  pObtenerNombre,
   pRegistroCelularFin,
+  pRegistrarVenta,
+  pObtenerProducto,
+  pFinalObtenerProducto
 ];
