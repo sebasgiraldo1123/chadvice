@@ -183,6 +183,7 @@ export const pasos = [
   pConsultarCelularesFiltroMemoria128,
   pRegistroCelular,
   pObtenerNombre,
+  pObtenerNombre,
   pRegistroCelularFin,
   pRegistrarVenta,
   pObtenerProducto,
