@@ -72,7 +72,7 @@ export default class FiltroCelular extends Query {
     return filtro.map((cel) => {
       if (!cel.imagenFrontal) {
         return {
-          text: `nombre: ${cel.nombre}\nmarca: ${cel.marca}\nprecio: $${cel.precio}\nprocesador: ${cel.procesador}`,
+          text: `nombre: ${cel.nombre}\nmarca: ${cel.marca}\nprecio: ${cel.precio}$\nprocesador: ${cel.procesador}`,
         };
       }
       const base64Image = cel.imagenFrontal;
@@ -80,7 +80,7 @@ export default class FiltroCelular extends Query {
       const buffer = Buffer.from(base64Data, "base64");
       return {
         image: buffer,
-        caption: `nombre: ${cel.nombre}\nmarca: ${cel.marca}\nprecio: $${cel.precio}\nprocesador: ${cel.procesador}`,
+        caption: `nombre: ${cel.nombre}\nmarca: ${cel.marca}\nprecio: ${cel.precio}$\nprocesador: ${cel.procesador}`,
         footer: "Celular",
         headerType: 4,
       };

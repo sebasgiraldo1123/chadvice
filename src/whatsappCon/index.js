@@ -11,7 +11,6 @@ let sock;
 let qrDinamic;
 
 const bot = new Controlador();
-var numeroTelefonoUsuario = "";
 async function connectToWhatsApp() {
   const { state, saveCreds } = await useMultiFileAuthState("session_auth_info");
 
@@ -73,7 +72,7 @@ async function connectToWhatsApp() {
       if (!messages[0]?.key.fromMe) return;
 
       const mensajeEntrante = messages[0]?.message?.conversation;
-      numeroTelefonoUsuario = messages[0]?.key?.remoteJid;
+      const numeroTelefonoUsuario = messages[0]?.key?.remoteJid;
       const mensajeEntranteMinuscula = mensajeEntrante.toLocaleLowerCase();
       
       
@@ -235,4 +234,4 @@ async function connectToWhatsApp() {
   sock.ev.on("creds.update", saveCreds);
 }
 
-export {connectToWhatsApp, numeroTelefonoUsuario};
+export {connectToWhatsApp};

@@ -4,7 +4,6 @@ import PasoQuery from "./pasoQuery.js";
 import PasoInput from "./pasoInput.js";
 import PasoInputLista from "./pasoInputLista.js";
 import Query from "./query.js";
-import { numeroTelefonoUsuario } from "../../whatsappCon/index.js";
 import RegistroCelular from "./registroCelular.js";
 import PasoFinalQuery from "./pasoFinalQuery.js";
 import FiltroCelular from "./filtroCelular.js";
@@ -111,7 +110,7 @@ const pConsultarCelularesFiltroMemoria128 = new PasoFinalQuery(
   filtroCelular
 );
 
-const registrarVenta = new RegistroVenta(numeroTelefonoUsuario);
+const registrarVenta = new RegistroVenta();
 const pRegistrarVenta = new PasoInput(
   "15",
   "Registrar venta",
