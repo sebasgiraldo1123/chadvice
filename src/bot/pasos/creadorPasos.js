@@ -118,6 +118,7 @@ const pRegistrarVenta = new PasoInput(
   "_",
   registrarVenta
 );
+
 const pObtenerProducto = new PasoInputLista(
   "16",
   "Registrar venta",
@@ -136,7 +137,6 @@ const pAñadirProducto = new
 while (pAñadirProducto.valor == "si") {
   
 }
-
 const pFinalRegistrarVenta = new PasoFinalQuery(
   "18",
   "Registrar venta",
