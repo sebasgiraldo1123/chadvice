@@ -38,7 +38,8 @@ export default class PasoInputLista extends PasoInput {
     if (!list) {
       list = [];
     }
-    list.push(valor);
+    const valores = valor.split(",");
+    list.push({"producto": valores[0],"memInterna":valores[1],"color": valores[2], "cantidad": valores[3]});
     this.query.valores.set(clave, list);
   }
 }

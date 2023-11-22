@@ -27,7 +27,7 @@ export default class FiltroCelular extends Query {
 
   async ejecutar() {
     const celulares = await new CelularsBD().obtenerTodos();
-    const filtro = celulares
+    const filtro = celulares 
       .filter((celular) => {
         if (!this.valores.get("tipo")) return true;
         const tipo = this.valores.get("tipo") == "Nuevo" ? "n" : "e";

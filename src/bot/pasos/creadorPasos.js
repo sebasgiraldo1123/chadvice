@@ -118,20 +118,25 @@ const pRegistrarVenta = new PasoInput(
   "_",
   registrarVenta
 );
-const pObtenerProducto = new PasoInput(
+
+const pObtenerProducto = new PasoInputLista(
   "16",
   "Registrar venta",
-  "Ingrese el nombre del producto:",
+  "Ingrese el nombre del producto y luego de una coma la cantidad de unidades que se vendió del producto:",
   "cedula",
   registrarVenta
 );
-const pFinalObtenerProducto = new PasoInputLista(
+const pMasProductos = new PasoOpciones(
   "17",
   "Registrar venta",
-  "Se está procesando la solicitud",
-  "productos",
-  registrarVenta
+  "¿Desea registrar otro producto?",
 );
+
+const pAñadirProducto = new 
+
+while (pAñadirProducto.valor == "si") {
+  
+}
 const pFinalRegistrarVenta = new PasoFinalQuery(
   "18",
   "Registrar venta",

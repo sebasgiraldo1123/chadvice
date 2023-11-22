@@ -1,14 +1,20 @@
 import IBase from "../base.js";
-import {Celular} from "../schemas.js";
+import {Celular, DetallesVenta, Producto} from "../schemas.js";
 import Productos from "./productos.js";
   
-export default class Celulares extends IBase {
+export default class DetallesVentas extends IBase {
     constructor() {
         super();
     }
 
-    agregar(data) {
-        console.log("Agregando equipo");
+    async agregar(venta, producto, cantidad) {
+        const productoEncontrado = Productos.obtenerPorNombre(producto.nombre);
+        return await DetallesVenta.create({
+            idVenta: venta.idVenta,
+            idProducto: productoEncontrado.idProducto,
+            cantidad: cantidad,
+            subTotal: productoEncontrado.precio * cantidad,
+          }, {include: {"model": Producto, include: [Celular, Otro]}});
     }
 
     async obtenerTodos() {

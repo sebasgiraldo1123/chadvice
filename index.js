@@ -356,30 +356,24 @@ import { crearEsquemas } from "./src/datos/schemas.js";
 // import { Productos, Otros, Celulares } from "./src/datos/index.js";
 import Ventas from "./src/datos/controladores/ventas.js"
 import Celulares from "./src/datos/controladores/celulares.js";
+import Productos from "./src/datos/controladores/productos.js";
 import { log } from "sharp/lib/libvips.js";
+import Empleados from "./src/datos/controladores/empleados.js";
 
 const PORT = process.env.PORT || 3000;
 const app = Express();
 
-connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
+// connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
 crearEsquemas();
 
 app.listen(PORT, () => {
   console.log("Server Run PORT : " + PORT);
 });
 
-async function ventas(){
-  const ventas = await new Ventas().obtenerTodos();
-  console.log(ventas[0]);
+async function pruebaORM() {
+  const empleados = new Productos();
+  const empleado = await empleados.obtenerPorId(11);
+  console.log(empleado);
 }
 
-console.log("Estoy funcionando papá!!!!!!!!!!!!!!!!!!!!!");
-
-// ventas();
-
-
-// ! quitar import (prueba orm)
-// const celulares = new Celulares();
-// celulares.obtenerTodos().then((data) => {
-//   console.log(data[0]);
-// });
+pruebaORM();

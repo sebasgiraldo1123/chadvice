@@ -18,6 +18,7 @@ export default class RegistroVenta extends Query {
     console.log(this.valores);
     console.log("-------------------------------------");
 
-    return [{ text: ` ${this.valores.get("numeroTelefonoUsuario")}` }];
+    return [{ text: ` ${this.valores.get("productos")}` }];
+
   }
 }
