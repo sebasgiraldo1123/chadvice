@@ -2,7 +2,7 @@ import IBase from "../base.js";
 import {Celular} from "../schemas.js";
 import Productos from "./productos.js";
   
-export default class Celulares extends IBase {
+export default class Facturas extends IBase {
     constructor() {
         super();
     }

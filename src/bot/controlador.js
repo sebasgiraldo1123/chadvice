@@ -4,6 +4,7 @@ import PasoOpciones from "./pasos/pasoOpciones.js";
 import PasoQuery from "./pasos/pasoQuery.js";
 import PasoInput from "./pasos/pasoInput.js";
 import { pasos } from "./pasos/creadorPasos.js";
+import PasoInputLista from "./pasos/pasoInputLista.js";
 
 const PASO_BASE = "0";
 export default class Controlador {
@@ -21,7 +22,8 @@ export default class Controlador {
 
     if (
       !(pasoActual instanceof PasoOpciones) &&
-      !(pasoActual instanceof PasoInput)
+      !(pasoActual instanceof PasoInput) &&
+      !(pasoActual instanceof PasoInputLista)
     ) {
       usuario.pasoActual = PASO_BASE;
       this.usuarios.modificarPorId(usuario.idUsuario, usuario);

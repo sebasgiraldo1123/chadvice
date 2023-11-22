@@ -1,8 +1,7 @@
 import IBase from "../base.js";
-import {Celular} from "../schemas.js";
-import Productos from "./productos.js";
+import { Usuario, Empleado } from "../schemas.js";
   
-export default class Celulares extends IBase {
+export default class Empleados extends IBase {
     constructor() {
         super();
     }
@@ -12,42 +11,26 @@ export default class Celulares extends IBase {
     }
 
     async obtenerTodos() {
-        const productos = new Productos();
-        const data = await productos.obtenerTodos();
-        const listaCelulares = [];
-
-    
-        await Promise.all(data.map(async (producto) => {
-            const celular = await this.obtenerPorId(producto.idCelular);
-            if (celular) {
-                const cel = {
-                    id: producto.idCelular,
-                    nombre: producto.nombre,
-                    marca: celular.dataValues.marca,
-                    pantalla: celular.dataValues.pantalla,
-                    capacidadBateria: celular.dataValues.capacidadBateria,
-                    camPrincipal: celular.dataValues.camPrincipal,
-                    procesador: celular.dataValues.procesador,
-                    memInterna: celular.dataValues.memInterna,
-                    memRam: celular.dataValues.memRam,
-                    tipo: celular.dataValues.tipo,
-                    estado: celular.dataValues.estado,
-                    porcentajeBateria: celular.dataValues.porcentajeBateria,
-                    imagenTrasera: celular.dataValues.imagenTrasera,
-                    imagenFrontal: celular.dataValues.imagenFrontal,
-                    precio: producto.precio,
-                    stock: producto.stock,
-                    color: producto.color,
-                };
-                listaCelulares.push(cel);
-            }
-    }));
-
-        return listaCelulares;
+        const empleados = await Empleado.findAll({ include: Usuario });
+        if (!empleados) return [];
+        return empleados.map((empleado) => {
+          const { Usuario, ...datos } = empleado.dataValues;
+          return { ...datos, ...Usuario.dataValues };
+        });
     }
 
-    obtenerPorId(id) {
-        return Celular.findByPk(id);
+    async obtenerPorId(id) {
+        const empleado = await Empleado.findByPk(id, { include: Usuario });
+        if (!empleado) return null;
+        const { Usuario: { dataValues: usuarioDataValues }, ...datos } = empleado.dataValues;
+        return { ...datos, ...usuarioDataValues}
+    }
+
+    async obtenerPorCedula(cedula) {
+        const empleado = await Empleado.findOne({include: {model: Usuario, where: {cedula: cedula}}});
+        if (!empleado) return null;
+        const { Usuario: { dataValues: usuarioDataValues }, ...datos } = empleado.dataValues;
+        return { ...datos, ...usuarioDataValues}
     }
 
     modificarPorId(id, data) {

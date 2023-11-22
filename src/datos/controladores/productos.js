@@ -1,6 +1,5 @@
 import IBase from "../base.js";
-import {Producto} from "../schemas.js";
-import {Celular} from "../schemas.js";
+import {Producto, Celular, Otro} from "../schemas.js";
 
 export default class Productos extends IBase {
   constructor() {
@@ -12,15 +11,20 @@ export default class Productos extends IBase {
   }
 
   async obtenerTodos() {
-    var productos = await Producto.findAll();
+    const productos = await Producto.findAll();
     return productos.map(({dataValues}) => dataValues);
   }
 
-  obtenerPorId(id) {
-    Producto.findByPk(id, { include: Celular }).then((producto) => {
-      console.log('Datos del producto:', producto.toJSON());
-      console.log('Datos del celular relacionado:', producto.Celular.toJSON());
-    });
+  async obtenerPorId(id) {
+    const producto = await Producto.findByPk(id, { include: [Celular, Otro] })
+    if(!producto) return null;
+    if(!producto.dataValues.Celular){
+      const {Otro: {dataValues:dataOtro}, ...datos} = producto.dataValues;
+      return {...datos, ...dataOtro};
+    }else{
+      const {Celular: {dataValues:dataCelular}, ...datos} = producto.dataValues;
+      return {...datos, ...dataCelular};
+    }
   }
 
   modificarPorId(id, data) {

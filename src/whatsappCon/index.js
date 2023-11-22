@@ -75,7 +75,6 @@ async function connectToWhatsApp() {
       const numeroTelefonoUsuario = messages[0]?.key?.remoteJid;
       const mensajeEntranteMinuscula = mensajeEntrante.toLocaleLowerCase();
       
-      
       const respuestas = await bot.mensaje(
         mensajeEntranteMinuscula,
         numeroTelefonoUsuario

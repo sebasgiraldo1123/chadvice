@@ -1,8 +1,8 @@
+import { where } from "sequelize";
 import IBase from "../base.js";
-import {Celular} from "../schemas.js";
-import Productos from "./productos.js";
+import {Cliente, Usuario} from "../schemas.js";
   
-export default class Celulares extends IBase {
+export default class Clietnes extends IBase {
     constructor() {
         super();
     }
@@ -12,44 +12,28 @@ export default class Celulares extends IBase {
     }
 
     async obtenerTodos() {
-        const productos = new Productos();
-        const data = await productos.obtenerTodos();
-        const listaCelulares = [];
-
-    
-        await Promise.all(data.map(async (producto) => {
-            const celular = await this.obtenerPorId(producto.idCelular);
-            if (celular) {
-                const cel = {
-                    id: producto.idCelular,
-                    nombre: producto.nombre,
-                    marca: celular.dataValues.marca,
-                    pantalla: celular.dataValues.pantalla,
-                    capacidadBateria: celular.dataValues.capacidadBateria,
-                    camPrincipal: celular.dataValues.camPrincipal,
-                    procesador: celular.dataValues.procesador,
-                    memInterna: celular.dataValues.memInterna,
-                    memRam: celular.dataValues.memRam,
-                    tipo: celular.dataValues.tipo,
-                    estado: celular.dataValues.estado,
-                    porcentajeBateria: celular.dataValues.porcentajeBateria,
-                    imagenTrasera: celular.dataValues.imagenTrasera,
-                    imagenFrontal: celular.dataValues.imagenFrontal,
-                    precio: producto.precio,
-                    stock: producto.stock,
-                    color: producto.color,
-                };
-                listaCelulares.push(cel);
-            }
-    }));
-
-        return listaCelulares;
+        const clientes = await Cliente.findAll({ include: Usuario });
+        if (!clientes) return [];
+        return clientes.map((cliente) => {
+          const { Usuario, ...datos } = cliente.dataValues;
+          return { ...datos, ...Usuario.dataValues };
+        });
     }
 
-    obtenerPorId(id) {
-        return Celular.findByPk(id);
+    async obtenerPorId(id) {
+        const cliente = await Cliente.findByPk(id, { include: Usuario });
+        if (!cliente) return null;
+        const { Usuario: { dataValues: usuarioDataValues }, ...datos } = cliente.dataValues;
+        return { ...datos, ...usuarioDataValues}
     }
 
+    async obtenerPorCedula(cedula) {
+        const cliente = await Cliente.findOne({include: {model: Usuario, where: {cedula: cedula}}});
+        if (!cliente) return null;
+        const { Usuario: { dataValues: usuarioDataValues }, ...datos } = cliente.dataValues;
+        return { ...datos, ...usuarioDataValues}
+    }
+ 
     modificarPorId(id, data) {
         console.log("Modificando equipo por id");
     }
