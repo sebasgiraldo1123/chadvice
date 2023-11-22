@@ -5,7 +5,8 @@ export default class RegistroVenta extends Query {
     super();
     this.valores.set("numeroTelefonoUsuario", numeroUsuario);
     this.valores.set("productos", null);
-    this.valores.set("cedula", null);
+    this.valores.set("cedulaCliente", null);
+    this.valores.set("cedulaEmpleado", null);
   }
 
   limpiar() {
