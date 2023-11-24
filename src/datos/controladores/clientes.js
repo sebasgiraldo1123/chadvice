@@ -2,7 +2,7 @@ import { where } from "sequelize";
 import IBase from "../base.js";
 import {Cliente, Usuario} from "../schemas.js";
   
-export default class Clietnes extends IBase {
+export default class Clientes extends IBase {
     constructor() {
         super();
     }

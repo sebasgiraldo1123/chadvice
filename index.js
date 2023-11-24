@@ -363,7 +363,7 @@ import Empleados from "./src/datos/controladores/empleados.js";
 const PORT = process.env.PORT || 3000;
 const app = Express();
 
-// connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
+connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
 crearEsquemas();
 
 app.listen(PORT, () => {
@@ -376,4 +376,4 @@ async function pruebaORM() {
   console.log(empleado);
 }
 
-pruebaORM();
+// pruebaORM();
