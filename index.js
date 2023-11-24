@@ -357,7 +357,9 @@ import { crearEsquemas } from "./src/datos/schemas.js";
 import Ventas from "./src/datos/controladores/ventas.js"
 import Celulares from "./src/datos/controladores/celulares.js";
 import Productos from "./src/datos/controladores/productos.js";
+import Productos from "./src/datos/controladores/productos.js";
 import { log } from "sharp/lib/libvips.js";
+import Empleados from "./src/datos/controladores/empleados.js";
 import Empleados from "./src/datos/controladores/empleados.js";
 
 const PORT = process.env.PORT || 3000;
@@ -376,4 +378,4 @@ async function pruebaORM() {
   console.log(empleado);
 }
 
-pruebaORM();
+// pruebaORM();
