@@ -352,30 +352,12 @@ server.listen(port, () => {
 import { connectToWhatsApp } from "./src/whatsappCon/index.js";
 import Express from "express";
 import { crearEsquemas } from "./src/datos/schemas.js";
-// ! quitar import (prueba orm)
-// import { Productos, Otros, Celulares } from "./src/datos/index.js";
-import Ventas from "./src/datos/controladores/ventas.js"
-import Celulares from "./src/datos/controladores/celulares.js";
-import Productos from "./src/datos/controladores/productos.js";
-import Productos from "./src/datos/controladores/productos.js";
-import { log } from "sharp/lib/libvips.js";
-import Empleados from "./src/datos/controladores/empleados.js";
-import Empleados from "./src/datos/controladores/empleados.js";
 
 const PORT = process.env.PORT || 3000;
 const app = Express();
 
-// connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
+connectToWhatsApp().catch((err) => console.log("unexpected error: " + err)); // catch any errors
 crearEsquemas();
 
 app.listen(PORT, () => {
   console.log("Server Run PORT : " + PORT);
-});
-
-async function pruebaORM() {
-  const empleados = new Productos();
-  const empleado = await empleados.obtenerPorId(11);
-  console.log(empleado);
-}
-
-// pruebaORM();

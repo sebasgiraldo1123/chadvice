@@ -8,6 +8,7 @@ import RegistroCelular from "./registroCelular.js";
 import PasoFinalQuery from "./pasoFinalQuery.js";
 import FiltroCelular from "./filtroCelular.js";
 import RegistroVenta from "./registrarVentas.js";
+import { Usuarios } from "../../datos/index.js";
 
 async function creadorPasos(usuario = null) {
 
@@ -32,7 +33,9 @@ async function creadorPasos(usuario = null) {
     "Registro de productos",
     "Ingrese el nombre del producto: ",
     "cedula",
+
     queryRegistroProductos
+
   );
   const pRegistroCelularFin = new PasoFinalQuery(
     "14",
@@ -54,7 +57,7 @@ async function creadorPasos(usuario = null) {
     "Consultar otros productos",
     "Aún no implementado"
   );
-  
+ 
   const pConsultarCelulares = new PasoOpciones("4", "Consultar celulares", "");
   const filtroCelular = new FiltroCelular();
   const pConsultarCelularesTodos = new PasoFinalQuery(
@@ -64,7 +67,7 @@ async function creadorPasos(usuario = null) {
     "_",
     filtroCelular
   );
-  
+
   const pConsultarCelularesFiltro = new PasoQuery(
     "6",
     "Filtrar",
@@ -146,8 +149,8 @@ async function creadorPasos(usuario = null) {
   pObtenerProducto.agregarOpcion(pFinalObtenerProducto);
   pFinalObtenerProducto.agregarOpcion(pFinalRegistrarVenta);
   
-  
-  pInicio.agregarOpcion(pUbicacion, pConsultarProductos, pRegistroCelular,pRegistrarVenta);
+
+  pInicio.agregarOpcion(pConsultarProductos);
   pConsultarProductos.agregarOpcion(pConsultarCelulares, pConsultarOtros);
   pConsultarCelulares.agregarOpcion(
     pConsultarCelularesTodos,

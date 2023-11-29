@@ -1,53 +1,37 @@
 import IBase from "../base.js";
-import {Celular} from "../schemas.js";
-import Productos from "./productos.js";
+import {Factura, Venta} from "../schemas.js";
   
 export default class Facturas extends IBase {
     constructor() {
         super();
     }
 
-    agregar(data) {
-        console.log("Agregando equipo");
+    async agregar(idVenta, total, fecha, pdf = "") {
+        const factura = await Factura.create({
+            idVenta: idVenta,
+            total: total,
+            fecha: fecha,
+            archivo: pdf
+        });
+        return factura;
     }
 
     async obtenerTodos() {
-        const productos = new Productos();
-        const data = await productos.obtenerTodos();
-        const listaCelulares = [];
-
-    
-        await Promise.all(data.map(async (producto) => {
-            const celular = await this.obtenerPorId(producto.idCelular);
-            if (celular) {
-                const cel = {
-                    id: producto.idCelular,
-                    nombre: producto.nombre,
-                    marca: celular.dataValues.marca,
-                    pantalla: celular.dataValues.pantalla,
-                    capacidadBateria: celular.dataValues.capacidadBateria,
-                    camPrincipal: celular.dataValues.camPrincipal,
-                    procesador: celular.dataValues.procesador,
-                    memInterna: celular.dataValues.memInterna,
-                    memRam: celular.dataValues.memRam,
-                    tipo: celular.dataValues.tipo,
-                    estado: celular.dataValues.estado,
-                    porcentajeBateria: celular.dataValues.porcentajeBateria,
-                    imagenTrasera: celular.dataValues.imagenTrasera,
-                    imagenFrontal: celular.dataValues.imagenFrontal,
-                    precio: producto.precio,
-                    stock: producto.stock,
-                    color: producto.color,
-                };
-                listaCelulares.push(cel);
-            }
-    }));
-
-        return listaCelulares;
+       const facturas = await Factura.findAll({include: {model: Venta}});
+       if (!facturas) return null;
+       return facturas.map((factura) => {
+        const {Ventum, ...datos} = factura.dataValues;
+        const datosVenta = Ventum.dataValues;
+        return { ...datos, ...datosVenta };  
+       });
     }
 
-    obtenerPorId(id) {
-        return Celular.findByPk(id);
+    async obtenerPorId(id) {
+        const factura = await Factura.findByPk(id,{include: Venta});
+        if (!factura) return null;
+       const {VentaAsociada, ...datos} = factura.dataValues;
+       const datosVenta = VentaAsociada.dataValues;
+       return { ...datos, ...datosVenta };
     }
 
     modificarPorId(id, data) {
