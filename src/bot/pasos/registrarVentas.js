@@ -1,3 +1,4 @@
+import { Ventas } from "../../datos/index.js";
 import Query from "./query.js";
 
 export default class RegistroVenta extends Query {
@@ -15,11 +16,15 @@ export default class RegistroVenta extends Query {
   }
 
   async ejecutar() {
+
+    const ventas = new Ventas();
+    const ventaRegistrada = await ventas.agregar(this.valores.get("cedulaCliente"), this.valores.get("cedulaEmpleado"), this.valores.get("productos"));
+
     console.log("-------------------------------------");
-    console.log(this.valores);
+    console.log(ventaRegistrada);
     console.log("-------------------------------------");
 
-    return [{ text: ` ${this.valores.get("productos")}` }];
+    return [{ text: ` ${ventaRegistrada}` }];
 
   }
 }

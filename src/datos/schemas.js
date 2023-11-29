@@ -308,7 +308,7 @@ export const Factura = sequelize.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    archivo:{
+    ruta_archivo:{
       type: DataTypes.STRING(100000),
       allowNull: false,
     }  

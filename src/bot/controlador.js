@@ -16,7 +16,9 @@ export default class Controlador {
   async mensaje(input, numeroTelefonoUsuario) {
 
     let usuario = await this.usuarios.obtenerPorTelefono(numeroTelefonoUsuario);
+    console.log(usuario);
     if (!usuario) usuario = this.usuarios.agregarNuevo(numeroTelefonoUsuario);
+
 
     this.pasos = await creadorPasos(usuario);
 
