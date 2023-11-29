@@ -19,7 +19,6 @@ export default class Controlador {
     console.log(usuario);
     if (!usuario) usuario = this.usuarios.agregarNuevo(numeroTelefonoUsuario);
 
-
     this.pasos = await creadorPasos(usuario);
 
     const idPasoActual = usuario.pasoActual;

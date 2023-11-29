@@ -352,15 +352,6 @@ server.listen(port, () => {
 import { connectToWhatsApp } from "./src/whatsappCon/index.js";
 import Express from "express";
 import { crearEsquemas } from "./src/datos/schemas.js";
-// ! quitar import (prueba orm)
-// import { Productos, Otros, Celulares } from "./src/datos/index.js";
-import Ventas from "./src/datos/controladores/ventas.js"
-import Celulares from "./src/datos/controladores/celulares.js";
-import Productos from "./src/datos/controladores/productos.js";
-import { log } from "sharp/lib/libvips.js";
-import Empleados from "./src/datos/controladores/empleados.js";
-import { Usuarios } from "./src/datos/index.js";
-import Facturas from "./src/datos/controladores/facturas.js";
 
 const PORT = process.env.PORT || 3000;
 const app = Express();
@@ -370,12 +361,3 @@ crearEsquemas();
 
 app.listen(PORT, () => {
   console.log("Server Run PORT : " + PORT);
-});
-
-async function pruebaORM() {
-  const empleados = new Facturas();
-  const empleado = await empleados.obtenerTodos();
-  console.log(empleado);
-}
-
-// pruebaORM();
